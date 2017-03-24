@@ -9,28 +9,28 @@
         <meta name="description" content="A short description of my project">
       
       
-        <link rel="canonical" href="https://orzjerry.github.io/about/">
+        <link rel="canonical" href="https://orzjerry.github.io/linux/encryption-for-chacha20/">
       
       
         <meta name="author" content="orzjerry">
       
       
-        <link rel="shortcut icon" href="../assets/images/favicon.png">
+        <link rel="shortcut icon" href="../../assets/images/favicon.png">
       
       <meta name="generator" content="mkdocs-0.16.2, mkdocs-material-1.4.1">
     
     
       
-        <title>About - My Wiki</title>
+        <title>encryption for chacha20 & salsa20</title>
       
     
     
-      <script src="../assets/javascripts/modernizr-56ade86843.js"></script>
+      <script src="../../assets/javascripts/modernizr-56ade86843.js"></script>
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application-76741b64bc.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application-76741b64bc.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-66fa0d9bba.palette.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-66fa0d9bba.palette.css">
       
     
     
@@ -69,8 +69,8 @@
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
         
-          <a href=".." title="My Wiki" class="md-logo md-header-nav__button">
-            <img src="../images/d.jpeg" width="24" height="24">
+          <a href="../.." title="My Wiki" class="md-logo md-header-nav__button">
+            <img src="../../images/d.jpeg" width="24" height="24">
           </a>
         
       </div>
@@ -82,8 +82,12 @@
           
             
               
+                <span class="md-header-nav__parent">
+                  Linux
+                </span>
+              
             
-            About
+            Encryption for chacha20
           
         </span>
       </div>
@@ -155,7 +159,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     
       <i class="md-logo md-nav__button">
-        <img src="../images/d.jpeg">
+        <img src="../../images/d.jpeg">
       </i>
     
     My Wiki
@@ -191,8 +195,20 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="Home" class="md-nav__link">
+    <a href="../.." title="Home" class="md-nav__link">
       Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../about/" title="About" class="md-nav__link">
+      About
     </a>
   </li>
 
@@ -204,28 +220,9 @@
   
 
 
-  <li class="md-nav__item md-nav__item--active">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-      
-    
-    
-    <a href="./" title="About" class="md-nav__link md-nav__link--active">
-      About
-    </a>
-    
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       Linux
@@ -243,7 +240,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../linux/Linux-order-about-ls/" title="Linux order about ls" class="md-nav__link">
+    <a href="../Linux-order-about-ls/" title="Linux order about ls" class="md-nav__link">
       Linux order about ls
     </a>
   </li>
@@ -253,11 +250,18 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../linux/encryption-for-chacha20/" title="Encryption for chacha20" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+    <a href="./" title="Encryption for chacha20" class="md-nav__link md-nav__link--active">
       Encryption for chacha20
     </a>
+    
   </li>
 
         
@@ -267,7 +271,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../linux/linux-after-hacked-security-check/" title="Linux after hacked security check" class="md-nav__link">
+    <a href="../linux-after-hacked-security-check/" title="Linux after hacked security check" class="md-nav__link">
       Linux after hacked security check
     </a>
   </li>
@@ -292,8 +296,6 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
-  
   
 </nav>
                   </div>
@@ -306,13 +308,39 @@
               
                 
                 
-                <h1 id="about-me">About me<a class="headerlink" href="#about-me" title="Permanent link">&para;</a></h1>
-<ul>
-<li>this is my wiki.</li>
-<li>use mkdocs</li>
-<li>host at github</li>
-<li>wirte from Mweb</li>
+                  <h1>Encryption for chacha20</h1>
+                
+                <ul>
+<li>linux</li>
+<li>科学上网</li>
 </ul>
+<hr />
+<p>首先先了解一下加密。在科学上网的时候我们都是需要借助梯子的，这些梯子之所以有效是因为进行了伪装，而这个伪装就是<em>加密</em>
+ 然后这道加密的速度和质量也关系着科学上网的速度和体验。加密的越快，就能越快的爬上梯子，加密的质量越好，伪装的越好，突破检查站的速度也就越快。
+ 在使用shadowsocks使用中我们能够使用多种加密算法，例如:</p>
+<pre class="codehilite"><code>aes-256-cfb aes-128-cfb aes-192-cfb aes-256-ofb aes-128-ofb
+aes-192-ofb aes-128-ctr aes-192-ctr aes-256-ctr aes-128-cfb8 
+aes-192-cfb8 aes-256-cfb8 aes-128-cfb1 aes-192-cfb1 aes-256-cfb1 
+bf-cfb camellia-128-cfb camellia-192-cfb camellia-256-cfb 
+cast5-cfb chacha20 rc2-cfb rc4-md5 salsa20 seed-cfb</code></pre>
+
+
+<p>等等
+其中我们使用的最多就是rc4和aes的有关算法，虽然速度不错，但是据说已经能够被检查站识别，短时间使用没有问题，长时间使用便会无法进行伪装无法进行科学上网。
+Shadowsocks的作者推荐的加密算法是aes-256-cfb，但是使用手机和openwrt的路由器来说，压力还是不小的，于是人们就创造了salsa20这个算法，而谷歌又对salsa20进行了改造，创造了chacha20这一算法。</p>
+<p>首先安装<code>libsodium</code>，让系统支持chacha20算法。</p>
+<pre class="codehilite"><code>apt-get install build-essential
+
+wget https://github.com/jedisct1/libsodium/releases/download/1.0.3/libsodium-1.0.3.tar.gz
+
+tar xf libsodium-1.0.3.tar.gz &amp;&amp; cd libsodium-1.0.3
+
+./configure &amp;&amp; make &amp;&amp; make install
+
+ldconfig</code></pre>
+
+
+<p>安装完成。</p>
                 
                   
                 
@@ -331,7 +359,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../Linux-order-about-ls/" title="Linux order about ls" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -340,19 +368,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
+                Linux order about ls
               </span>
             </div>
           </a>
         
         
-          <a href="../linux/Linux-order-about-ls/" title="Linux order about ls" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../linux-after-hacked-security-check/" title="Linux after hacked security check" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Linux order about ls
+                Linux after hacked security check
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -396,8 +424,8 @@
       
     </div>
     
-      <script src="../assets/javascripts/application-3964c0cb56.js"></script>
-      <script>app.initialize({url:{base:".."}})</script>
+      <script src="../../assets/javascripts/application-3964c0cb56.js"></script>
+      <script>app.initialize({url:{base:"../.."}})</script>
       
     
     
