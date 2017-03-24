@@ -9,7 +9,7 @@
         <meta name="description" content="A short description of my project">
       
       
-        <link rel="canonical" href="https://orzjerry.github.io/about/">
+        <link rel="canonical" href="https://orzjerry.github.io/linux-after-hacked-security-check/">
       
       
         <meta name="author" content="orzjerry">
@@ -21,7 +21,7 @@
     
     
       
-        <title>About - My Wiki</title>
+        <title>linux-after-hacked-security-check</title>
       
     
     
@@ -83,7 +83,7 @@
             
               
             
-            About
+            Linux after hacked security check
           
         </span>
       </div>
@@ -201,6 +201,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../about/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -211,22 +223,10 @@
       
     
     
-    <a href="./" title="About" class="md-nav__link md-nav__link--active">
-      About
-    </a>
-    
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../linux-after-hacked-security-check/" title="Linux after hacked security check" class="md-nav__link">
+    <a href="./" title="Linux after hacked security check" class="md-nav__link md-nav__link--active">
       Linux after hacked security check
     </a>
+    
   </li>
 
     
@@ -258,13 +258,108 @@
               
                 
                 
-                <h1 id="about-me">About me<a class="headerlink" href="#about-me" title="Permanent link">&para;</a></h1>
-<ul>
-<li>this is my wiki.</li>
-<li>use mkdocs</li>
-<li>host at github</li>
-<li>wirte from Mweb</li>
+                <ul>
+<li>linux</li>
 </ul>
+<hr />
+<h1 id="linux">linux系统的服务器被入侵后的检查<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h1>
+<p>linux系统的服务器被入侵，总结了以下的基本方法，供不大懂linux服务器网理人员参考考学习。
+首先先用iptraf查下，如果没装的运行yum install iptraf装下，看里面是不是UDP包发的很多，如果是，基本都被人装了后门</p>
+<p>1.检查帐户</p>
+<pre class="codehilite"><code>$ less /etc/passwd
+$ grep :0: /etc/passwd（检查是否产生了新用户，和UID、GID是0的用户）
+$ ls -l /etc/passwd（查看文件修改日期）
+$ awk -F: ‘$3= =0 {print $1}’ /etc/passwd（查看是否存在特权用户）
+$ awk -F: ‘length($2)= =0 {print $1}’ /etc/shadow（查看是否存在空口令帐户）</code></pre>
+
+
+<!-- more -->
+
+<p>2.检查日志</p>
+<p><code>last</code>（查看正常情况下登录到本机的所有用户的历史记录）</p>
+<p>注意<code>”entered promiscuous mode”</code></p>
+<p>注意错误信息</p>
+<p>注 意<code>Remote Procedure Call (rpc) programs with a log entry that includes a large number (&gt; 20) strange characters(-^PM-^PM-^PM-^PM-^PM-^PM-^PM-^PM)</code></p>
+<p>3.检查进程</p>
+<pre class="codehilite"><code>$ ps -aux（注意UID是0的）
+$ lsof -p pid（察看该进程所打开端口和文件）
+$ cat /etc/inetd.conf | grep -v “^#”（检查守护进程）
+检查隐藏进程
+$ ps -ef|awk ‘{print }’|sort -n|uniq &gt;1
+$ ls /porc |sort -n|uniq &gt;2
+$ diff 1 2</code></pre>
+
+
+<p>4.检查文件</p>
+<pre class="codehilite"><code>$ find / -uid 0 –perm -4000 –print
+$ find / -size +10000k –print
+$ find / -name “…” –print
+$ find / -name “.. ” –print
+$ find / -name “. ” –print
+$ find / -name ” ” –print
+
+注意SUID文件，可疑大于10M和空格文件
+$ find / -name core -exec ls -l {} ;（检查系统中的core文件）
+
+检查系统文件完整性
+$ rpm –qf /bin/ls
+$ rpm -qf /bin/login
+$ md5sum –b 文件名
+$ md5sum –t 文件名</code></pre>
+
+
+<p>5.检查RPM</p>
+<pre class="codehilite"><code>$ rpm –Va
+输出格式：
+S – File size differs
+M – Mode differs (permissions)
+5 – MD5 sum differs
+D – Device number mismatch
+L – readLink path mismatch
+U – user ownership differs
+G – group ownership differs
+T – modification time differs
+
+注意相关的 /sbin, /bin, /usr/sbin, and /usr/bin</code></pre>
+
+
+<p>6.检查网络</p>
+<pre class="codehilite"><code>$ ip link | grep PROMISC（正常网卡不该在promisc模式，可能存在sniffer）
+$ lsof –i
+$ netstat –nap（察看不正常打开的TCP/UDP端口)
+$ rp –a</code></pre>
+
+
+<p>7.检查计划任务
+注意root和UID是0的schedule</p>
+<pre class="codehilite"><code>$ crontab –u root –l
+$ cat /etc/crontab
+$ ls /etc/cron.*</code></pre>
+
+
+<p>8.检查后门</p>
+<pre class="codehilite"><code>$ cat /etc/crontab
+$ ls /var/spool/cron/
+$ cat /etc/rc.d/rc.local
+$ ls /etc/rc.d
+$ ls /etc/rc3.d
+$ find / -type f -perm 4000</code></pre>
+
+
+<p>9.检查内核模块</p>
+<p><code>$ lsmod</code></p>
+<p>10.检查系统服务</p>
+<pre class="codehilite"><code>$ chkconfig
+$ rpcinfo -p（查看RPC服务）</code></pre>
+
+
+<p>11.检查rootkit</p>
+<pre class="codehilite"><code>$ rkhunter -c
+$ chkrootkit -q</code></pre>
+
+
+<p>12.检查chkconfig 列表，防止一些程序加入到开机自启动中</p>
+<p><code>chkconfig --list</code></p>
                 
                   
                 
@@ -283,7 +378,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../about/" title="About" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -292,25 +387,11 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
+                About
               </span>
             </div>
           </a>
         
-        
-          <a href="../linux-after-hacked-security-check/" title="Linux after hacked security check" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Linux after hacked security check
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
         
       </nav>
     </div>
