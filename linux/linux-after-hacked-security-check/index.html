@@ -275,8 +275,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#linux" title="linux系统的服务器被入侵后的检查" class="md-nav__link">
-    linux系统的服务器被入侵后的检查
+  <a href="#1" title="1.检查帐户" class="md-nav__link">
+    1.检查帐户
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" title="2.检查日志" class="md-nav__link">
+    2.检查日志
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" title="3.检查进程" class="md-nav__link">
+    3.检查进程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" title="4.检查文件" class="md-nav__link">
+    4.检查文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5rpm" title="5.检查RPM" class="md-nav__link">
+    5.检查RPM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" title="6.检查网络" class="md-nav__link">
+    6.检查网络
   </a>
   
 </li>
@@ -314,8 +349,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#linux" title="linux系统的服务器被入侵后的检查" class="md-nav__link">
-    linux系统的服务器被入侵后的检查
+  <a href="#1" title="1.检查帐户" class="md-nav__link">
+    1.检查帐户
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" title="2.检查日志" class="md-nav__link">
+    2.检查日志
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" title="3.检查进程" class="md-nav__link">
+    3.检查进程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" title="4.检查文件" class="md-nav__link">
+    4.检查文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5rpm" title="5.检查RPM" class="md-nav__link">
+    5.检查RPM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" title="6.检查网络" class="md-nav__link">
+    6.检查网络
   </a>
   
 </li>
@@ -341,10 +411,10 @@
 <li>linux</li>
 </ul>
 <hr />
-<h2 id="linux">linux系统的服务器被入侵后的检查<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<p>linux系统的服务器被入侵后的检查</p>
 <p>linux系统的服务器被入侵，总结了以下的基本方法，供不大懂linux服务器网理人员参考考学习。
 首先先用iptraf查下，如果没装的运行yum install iptraf装下，看里面是不是UDP包发的很多，如果是，基本都被人装了后门</p>
-<p>1.检查帐户</p>
+<h2 id="1">1.检查帐户<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <pre class="codehilite"><code>$ less /etc/passwd
 $ grep :0: /etc/passwd（检查是否产生了新用户，和UID、GID是0的用户）
 $ ls -l /etc/passwd（查看文件修改日期）
@@ -354,12 +424,12 @@ $ awk -F: ‘length($2)= =0 {print $1}’ /etc/shadow（查看是否存在空口
 
 <!-- more -->
 
-<p>2.检查日志</p>
+<h2 id="2">2.检查日志<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <p><code>last</code>（查看正常情况下登录到本机的所有用户的历史记录）</p>
 <p>注意<code>”entered promiscuous mode”</code></p>
 <p>注意错误信息</p>
 <p>注 意<code>Remote Procedure Call (rpc) programs with a log entry that includes a large number (&gt; 20) strange characters(-^PM-^PM-^PM-^PM-^PM-^PM-^PM-^PM)</code></p>
-<p>3.检查进程</p>
+<h2 id="3">3.检查进程<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <pre class="codehilite"><code>$ ps -aux（注意UID是0的）
 $ lsof -p pid（察看该进程所打开端口和文件）
 $ cat /etc/inetd.conf | grep -v “^#”（检查守护进程）
@@ -369,7 +439,7 @@ $ ls /porc |sort -n|uniq &gt;2
 $ diff 1 2</code></pre>
 
 
-<p>4.检查文件</p>
+<h2 id="4">4.检查文件<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <pre class="codehilite"><code>$ find / -uid 0 –perm -4000 –print
 $ find / -size +10000k –print
 $ find / -name “…” –print
@@ -387,7 +457,7 @@ $ md5sum –b 文件名
 $ md5sum –t 文件名</code></pre>
 
 
-<p>5.检查RPM</p>
+<h2 id="5rpm">5.检查RPM<a class="headerlink" href="#5rpm" title="Permanent link">&para;</a></h2>
 <pre class="codehilite"><code>$ rpm –Va
 输出格式：
 S – File size differs
@@ -402,7 +472,7 @@ T – modification time differs
 注意相关的 /sbin, /bin, /usr/sbin, and /usr/bin</code></pre>
 
 
-<p>6.检查网络</p>
+<h2 id="6">6.检查网络<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <pre class="codehilite"><code>$ ip link | grep PROMISC（正常网卡不该在promisc模式，可能存在sniffer）
 $ lsof –i
 $ netstat –nap（察看不正常打开的TCP/UDP端口)
