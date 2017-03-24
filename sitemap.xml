@@ -4,7 +4,15 @@
     
     <url>
      <loc>https://orzjerry.github.io/</loc>
-     <lastmod>2017-03-20</lastmod>
+     <lastmod>2017-03-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://orzjerry.github.io/about/</loc>
+     <lastmod>2017-03-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
