@@ -258,9 +258,62 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Supervisord的安装与设置
+      </label>
+    
     <a href="./" title="Supervisord的安装与设置" class="md-nav__link md-nav__link--active">
       Supervisord的安装与设置
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="介绍" class="md-nav__link">
+    介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="安装" class="md-nav__link">
+    安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="配置" class="md-nav__link">
+    配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="配置文件" class="md-nav__link">
+    配置文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" title="管理" class="md-nav__link">
+    管理
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -309,6 +362,48 @@
   
   
   
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="介绍" class="md-nav__link">
+    介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="安装" class="md-nav__link">
+    安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="配置" class="md-nav__link">
+    配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="配置文件" class="md-nav__link">
+    配置文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" title="管理" class="md-nav__link">
+    管理
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -327,10 +422,10 @@
 <p>softwave
 <!----> linux</p>
 <hr />
-<p><strong><em>介绍</em></strong></p>
+<h2 id="_1"><strong><em>介绍</em></strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>Supervisord是用Python实现的一款非常实用的进程管理工具，类似于monit，monit和supervisord的一个比较大的差异是supervisord管理的进程必须由supervisord来启动，monit可以管理已经在运行的程序；supervisord还要求管理的程序是非daemon程序，supervisord会帮你把它转成daemon程序，因此如果用supervisord来管理nginx的话，必须在nginx的配置文件里添加一行设置daemon off让nginx以非daemon方式启动。
-<!-- more -->
-<strong><em>安装</em></strong></p>
+<!-- more --></p>
+<h2 id="_2"><strong><em>安装</em></strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>1.需要在python环境中安装pip，通过以下命令即可：</p>
 <pre class="codehilite"><code class="language-bash">    $ curl -O https://raw.github.com/pypa/pip/master/contrib/get-pip.py
     $ python get-pip.py</code></pre>
@@ -341,7 +436,7 @@
 
 
 <p>一般安装完的时候显示安装路径，如果不在bin路径，就自己添加一个软连接配置文件在 /etc/supervisord.conf我这里安装之后没有发现，我先到安装目录下找找，没有在自己创建那个文件，如果启动没有找到就在启动命令中添加配置文件路径。</p>
-<p><strong><em>配置</em></strong></p>
+<h2 id="_3"><strong><em>配置</em></strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>supervisord 提供了一个模板文件,执行下面shell文件或者输出到文件中，改改就可以用了</p>
 <pre class="codehilite"><code class="language-bash">echo_supervisord_conf
 #或者
@@ -349,7 +444,7 @@ echo_supervisord_conf &gt; supervisord.conf</code></pre>
 
 
 <p>具体的详细设置可以在配置文件的模版中寻找，在此不再赘述。</p>
-<p><strong><em>配置文件</em></strong></p>
+<h2 id="_4"><strong><em>配置文件</em></strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <pre class="codehilite"><code class="language-bash">[program:xxxxx] //项目名称
 user=xxxx    //所用用户 
 command=/usr/local/bin/xxxx -x /xxx/xxxxx  //启动服务所用的命令
@@ -360,7 +455,7 @@ stdout_logfile=/var/log/ss-out.log     //常规日志
 stopsignal=INT</code></pre>
 
 
-<p><strong><em>管理</em></strong></p>
+<h2 id="_5"><strong><em>管理</em></strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>Supervisord安装完成后有两个可用的命令行supervisor和supervisorctl，命令使用解释如下：</p>
 <p>supervisord，初始启动Supervisord，启动、管理配置中设置的进程。
 supervisorctl stop programxxx，停止某一个进程(programxxx)，programxxx为[program:chatdemon]里配置的值，这个示例就是chatdemon。
